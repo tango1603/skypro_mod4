@@ -1,0 +1,12 @@
+{
+  "name": "mod4",
+  "version": "1.0.0",
+  "description": "Данный проект содержит результат выполнения домашних заданий из 4 модуля в курсе фронтенд-разработчик Skypro",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
