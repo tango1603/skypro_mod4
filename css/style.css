@@ -1,112 +1,112 @@
 @font-face {
-  font-family: "StratosSkyeng";
-  src: url(../fonts/stratosskyengweb-regular.woff2);
+    font-family: 'StratosSkyeng';
+    src: url(../fonts/stratosskyengweb-regular.woff2);
 }
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  background: #004980;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-  font-family: "StratosSkyeng";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 32px;
+    background: #004980;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    font-family: 'StratosSkyeng';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
 }
 
 .modal {
-  max-width: 480px;
-  background: #C2F5FF;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 50px 70px;
-  border-radius: 12px;
+    max-width: 480px;
+    background: #c2f5ff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 70px;
+    border-radius: 12px;
 }
 
 .caption {
-  max-width: 208px;
-  color: #004980;
-  margin-bottom: 50px;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 40px;
-  line-height: 48px;
-  text-align: center;
+    max-width: 208px;
+    color: #004980;
+    margin-bottom: 50px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+    text-align: center;
 }
 
 .difficulty-level {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  margin-bottom: 70px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 70px;
 }
 
 .difficulty-level__item {
-  list-style-type: none;
-  -webkit-margin-before: 0px;
-          margin-block-start: 0px;
-  -webkit-margin-after: 0px;
-          margin-block-end: 0px;
-  -webkit-margin-start: 0px;
-          margin-inline-start: 0px;
-  -webkit-margin-end: 0px;
-          margin-inline-end: 0px;
-  -webkit-padding-start: 0px;
-          padding-inline-start: 0px;
-  width: 96px;
-  height: 98px;
-  background: #FFF;
-  border-radius: 12px;
-  color: #0080C1;
-  font-size: 64px;
-  line-height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.5s ease;
+    list-style-type: none;
+    -webkit-margin-before: 0px;
+    margin-block-start: 0px;
+    -webkit-margin-after: 0px;
+    margin-block-end: 0px;
+    -webkit-margin-start: 0px;
+    margin-inline-start: 0px;
+    -webkit-margin-end: 0px;
+    margin-inline-end: 0px;
+    -webkit-padding-start: 0px;
+    padding-inline-start: 0px;
+    width: 96px;
+    height: 98px;
+    background: #fff;
+    border-radius: 12px;
+    color: #0080c1;
+    font-size: 64px;
+    line-height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease;
 }
 .difficulty-level__item:hover {
-  transform: scale(1.1);
-  -webkit-transform: scale(1.1);
-  -moz-transform: scale(1.1);
-  -o-transform: scale(1.1);
-  background: #c7f37c;
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    background: #c7f37c;
 }
 
 .btn {
-  background: #7AC100;
-  max-width: 246px;
-  border-radius: 12px;
-  border: none;
-  color: #FFF;
-  text-align: center;
-  padding: 10px 60px;
-  text-decoration: none;
-  font-size: 24px;
-  line-height: 32px;
-  transition: all 0.5s ease;
+    background: #7ac100;
+    max-width: 246px;
+    border-radius: 12px;
+    border: none;
+    color: #fff;
+    text-align: center;
+    padding: 10px 60px;
+    text-decoration: none;
+    font-size: 24px;
+    line-height: 32px;
+    transition: all 0.5s ease;
 }
 .btn_selected {
-  transform: scale(1.1);
-  -webkit-transform: scale(1.1);
-  -moz-transform: scale(1.1);
-  -o-transform: scale(1.1);
-  background: #7AC100;
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    background: #7ac100;
 }
 .btn:hover {
-  transform: scale(1.1);
-  -webkit-transform: scale(1.1);
-  -moz-transform: scale(1.1);
-  -o-transform: scale(1.1);
-  background: #c7f37c;
-}/*# sourceMappingURL=style.css.map */
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    background: #c7f37c;
+} /*# sourceMappingURL=style.css.map */
