@@ -6,14 +6,16 @@ class App {
     this.parentNode = parentNode;
 
     this.difficultyLevel = null;
-    this.timeInGame = null;
-    this.cards = [];
+    this.timeInGame = null; //TODO: реализовать getTimeInGame()
+    this.cards = []; //TODO: реализовать getRandomCards(difficultyLevel)
     this.selectedCards = [];
+
+    render();
 
     this.difficultyLevelBtns = parentNode.querySelectorAll(
       ".difficulty-level__item"
     );
-    
+
     for (const btn of this.difficultyLevelBtns) {
       btn.addEventListener("click", () => {
         this.difficultyLevel = btn.getAttribute("data-difficulty");
@@ -27,11 +29,10 @@ class App {
       });
     }
 
-
     this.startBtn = parentNode.querySelector(".btn");
-    this.startBtn.addEventListener("click", () => {     
+    this.startBtn.addEventListener("click", () => {
       if (!this.difficultyLevel) return;
-      
+
       this.game = new Game(this);
       this.hide();
     });
@@ -43,6 +44,7 @@ class App {
   }  
 
   render(){
+    return 1;
     //TODO: реализовать рендер по шаблону
   }
 }

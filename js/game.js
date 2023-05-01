@@ -4,13 +4,13 @@ export class Game {
     this.render();
   }
 
+  getRandomCards(difficultyLevel){}
+
+  getTimeInGame(){}
+
   render() {
     //TODO: реализовать рендер по шаблону
     console.log("renderGame", this.state);
-
-
-
-
 
   }
 }
