@@ -109,6 +109,11 @@ body {
   background: #c7f37c;
 }
 
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
 .header {
   margin-top: 25px;
   display: flex;
@@ -118,7 +123,7 @@ body {
 }
 
 .time {
-  color: #FFF;
+  color: #fff;
   display: flex;
   flex-wrap: wrap;
   align-items: end;
@@ -141,9 +146,9 @@ body {
 
 .main {
   display: flex;
+  justify-content: space-around;
   flex-wrap: wrap;
   gap: 20px;
-  max-width: 1024px;
   margin-bottom: 50px;
   perspective: 30px;
 }
