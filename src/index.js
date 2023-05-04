@@ -1,4 +1,5 @@
-import { Game } from './game.js';
+import './style/style.scss';
+import { Game } from './js/game.js';
 
 class App {
     constructor(parentNode) {
