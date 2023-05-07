@@ -14,7 +14,6 @@ export class Game {
         this.btn.addEventListener('click', () => {
             this.hide();
             this.restartGame();
-            console.log('начать с начала', this);
         });
         this.getTimeInGame();
     }
@@ -30,7 +29,6 @@ export class Game {
                 if (this.int !== null) {
                     clearInterval(this.int);
                 }
-                console.log('start', this);
                 this.int = setInterval(this.displayTimer.bind(this), 1000);
             },
             stop() {
@@ -51,7 +49,6 @@ export class Game {
 
                 this.domMin.innerText = `${m}`;
                 this.domSec.innerText = `${s}`;
-                console.log(`${m} : ${s}`);
             },
         };
 
@@ -165,12 +162,26 @@ export class Game {
         this.state.parentNode.appendChild(
             render(templates.game(this.cardsForRender))
         );
-        //TODO: реализовать рендер по шаблону
-        console.log('renderGame', this.state);
+
+        this.setBtnActions();
+    }
+
+    setBtnActions() {
+        //TODO
+    }
+
+    checkCards() {
+        //TODO:
+    }
+
+    showCards() {
+        //TODO classList.add("");
+    }
+    hideCards() {
+        //TODO classList.remove("");
     }
 
     hide() {
-        console.log('hide()');
         this.state.timer.stop();
         this.state.parentNode.firstElementChild.remove();
     }
