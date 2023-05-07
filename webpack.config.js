@@ -6,6 +6,8 @@ const FileManagerPlugin = require('filemanager-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const environment = require('./environment');
 
 module.exports = {
     entry: path.join(__dirname, 'src', 'index.js'),
@@ -29,19 +31,27 @@ module.exports = {
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
             },
             {
-                test: /\.(png|jpg|jpeg|gif)$/i,
-                type: 'asset/resource',
-            },
-            {
-                test: /\.svg$/,
-                type: 'asset/resource',
+                test: /\.(png|gif|jpe?g|svg)$/i,
+                type: 'asset',
                 generator: {
-                    filename: path.join('icons', '[name].[contenthash][ext]'),
+                    filename: 'images/design/[name].[hash:6][ext]',
                 },
             },
         ],
     },
     plugins: [
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: path.resolve(environment.paths.source, 'images'),
+                    to: path.resolve(environment.paths.output, 'images'),
+                    toType: 'dir',
+                    globOptions: {
+                        ignore: ['*.DS_Store', 'Thumbs.db'],
+                    },
+                },
+            ],
+        }),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'src', 'template.html'),
             filename: 'index.html',
@@ -63,6 +73,9 @@ module.exports = {
     },
     optimization: {
         minimizer: [
+            new CopyWebpackPlugin({
+                patterns: [{ from: 'static', to: 'static' }],
+            }),
             new CssMinimizerPlugin(),
             new ImageMinimizerPlugin({
                 minimizer: {

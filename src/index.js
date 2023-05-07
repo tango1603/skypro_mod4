@@ -1,17 +1,23 @@
 import './style/style.scss';
-import { Game } from './js/game.js';
+import { Game } from './js/game';
+import render from './js/template/template-engine';
+import { templates } from './js/template/templates';
 
 class App {
     constructor(parentNode) {
         console.log('Game started', this);
-        this.parentNode = parentNode;
         this.state = {
-            parentNode: this.parentNode,
+            parentNode: parentNode,
             gameDesc: [],
             selectedCards: [],
             difficultyLevel: null,
         };
-        this.setBtnsLogic();
+
+        this.start = this.start.bind(this);
+        this.newGame = this.newGame.bind(this);
+        this.getRandomCards = this.getRandomCards.bind(this);
+
+        this.start();
     }
 
     getRandomCards(difficultyLevel) {
@@ -58,49 +64,12 @@ class App {
         }
 
         this.state.gameDesc = shuffleCards(shuffleCards(randomCards));
-
-        console.log('randomCard:', this.state.gameDesc);
     }
 
-    getTimeInGame() {
-        this.state.timer = {
-            domMin: this.parentNode.querySelector('#min'),
-            domSec: this.parentNode.querySelector('#sec'),
-            seconds: 0,
-            minutes: 0,
-            int: null,
-            start() {
-                if (this.int !== null) {
-                    clearInterval(this.int);
-                }
-                console.log('start', this);
-                this.int = setInterval(this.displayTimer.bind(this), 1000);
-            },
-            stop() {
-                clearInterval(this.int);
-            },
-            displayTimer() {
-                this.seconds++;
-                if (this.seconds === 60) {
-                    this.seconds = 0;
-                    this.minutes++;
-                    if (this.minutes === 60) {
-                        this.minutes = 0;
-                    }
-                }
+    start() {
+        this.state.parentNode.appendChild(render(templates.start));
 
-                let m = this.minutes < 10 ? '0' + this.minutes : this.minutes;
-                let s = this.seconds < 10 ? '0' + this.seconds : this.seconds;
-
-                console.log(`${m} : ${s}`);
-            },
-        };
-
-        this.state.timer.start();
-    }
-
-    setBtnsLogic() {
-        this.difficultyLevelBtns = this.parentNode.querySelectorAll(
+        this.difficultyLevelBtns = this.state.parentNode.querySelectorAll(
             '.difficulty-level__item'
         );
 
@@ -108,10 +77,6 @@ class App {
             btn.addEventListener('click', () => {
                 this.state.difficultyLevel =
                     btn.getAttribute('data-difficulty');
-                console.log(
-                    'difficulty-level__item click',
-                    this.state.difficultyLevel
-                );
 
                 for (const dLBtn of this.difficultyLevelBtns) {
                     dLBtn.classList.remove('btn_selected');
@@ -121,20 +86,22 @@ class App {
             });
         }
 
-        this.startBtn = this.parentNode.querySelector('.btn');
+        this.startBtn = this.state.parentNode.querySelector('.btn');
         this.startBtn.addEventListener('click', () => {
             if (!this.state.difficultyLevel) return;
 
-            this.getRandomCards(this.state.difficultyLevel);
-            this.game = new Game(this.state, this.parentNode);
-            this.hide();
-            this.getTimeInGame();
+            this.newGame();
         });
+    }
+    newGame() {
+        this.getRandomCards(this.state.difficultyLevel);
+
+        this.game = new Game(this, this.state.parentNode);
+        this.hide();
     }
 
     hide() {
-        console.log('hide()');
-        this.parentNode.firstElementChild.remove();
+        this.state.parentNode.firstElementChild.remove();
     }
 }
 
