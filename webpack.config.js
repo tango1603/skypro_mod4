@@ -10,7 +10,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const environment = require('./environment');
 
 module.exports = {
-    entry: path.join(__dirname, 'src', 'index.js'),
+    entry: path.join(__dirname, 'src', 'index.ts'),
     devtool: mode === 'production' ? false : 'source-map',
 
     output: {
@@ -21,6 +21,11 @@ module.exports = {
     },
     module: {
         rules: [
+            {
+                test: /\.ts$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
             {
                 test: /\.js$/,
                 use: 'babel-loader',
@@ -71,11 +76,11 @@ module.exports = {
         watchFiles: path.join(__dirname, 'src'),
         port: 9000,
     },
+    resolve: {
+        extensions: ['.ts', '.js'],
+    },
     optimization: {
         minimizer: [
-            new CopyWebpackPlugin({
-                patterns: [{ from: 'static', to: 'static' }],
-            }),
             new CssMinimizerPlugin(),
             new ImageMinimizerPlugin({
                 minimizer: {

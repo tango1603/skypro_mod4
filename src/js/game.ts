@@ -2,6 +2,13 @@ import render from './template/template-engine';
 import { templates } from './template/templates';
 
 export class Game {
+    btn: any;
+    btnModal: any;
+    cards: any;
+    cardsForRender: any;
+    restartGame: any;
+    state: any;
+    tempTimer: any;
     constructor(app) {
         this.state = app.state;
         this.restartGame = app.start;
@@ -65,7 +72,7 @@ export class Game {
     }
 
     render() {
-        this.state.gameDesc.forEach((card, cardIndex) => {
+        this.state.gameDesc.forEach((card, cardIndex: number) => {
             this.cardsForRender.push({
                 tag: 'div',
                 cls: ['card'],
@@ -172,7 +179,7 @@ export class Game {
     }
 
     checkCards(card) {
-        const curId = card.dataset.cid;
+        const curId: string = card.dataset.cid;
         const curCard = this.state.gameDesc[curId];
         const { selectedCard } = this.state;
         if (!selectedCard.card) {

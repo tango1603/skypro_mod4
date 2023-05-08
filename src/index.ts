@@ -4,6 +4,10 @@ import render from './js/template/template-engine';
 import { templates } from './js/template/templates';
 
 class App {
+    difficultyLevelBtns: any;
+    game: any;
+    startBtn: any;
+    state: any;
     constructor(parentNode) {
         console.log('Game started');
 
@@ -18,19 +22,29 @@ class App {
         this.start();
     }
 
-    getRandomCards(difficultyLevel) {
+    getRandomCards(difficultyLevel: string) {
         const levels = { lite: 6, medium: 12, hight: 18 };
         const level = levels[difficultyLevel];
 
         const deckBuilder = () => {
-            const values = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
-            const suits = [
+            const values: Array<string> = [
+                '6',
+                '7',
+                '8',
+                '9',
+                '10',
+                'J',
+                'Q',
+                'K',
+                'A',
+            ];
+            const suits: Array<Object> = [
                 { name: 'Hearts', imgUrl: './images/1.svg' },
                 { name: 'Diamonds', imgUrl: './images/2.svg' },
                 { name: 'Spades', imgUrl: './images/3.svg' },
                 { name: 'Clubs', imgUrl: './images/4.svg' },
             ];
-            const cards = [];
+            const cards: Array<Object> = [];
             for (let s = 0; s < suits.length; s++) {
                 for (let v = 0; v < values.length; v++) {
                     const value = values[v];
@@ -43,15 +57,15 @@ class App {
         };
 
         const randomCard = (cards) => {
-            const random = Math.floor(Math.random() * 36);
-            const cardValue = cards[random].value;
-            const cardSuit = cards[random].suit;
-            const isFindOut = true;
+            const random: number = Math.floor(Math.random() * 36);
+            const cardValue: string = cards[random].value;
+            const cardSuit: Object = cards[random].suit;
+            const isFindOut: boolean = true;
 
             return { cardValue, cardSuit, isFindOut };
         };
 
-        const shuffleCards = (cardsArray) => {
+        const shuffleCards = (cardsArray: Array<Object>) => {
             const shuffle = [...cardsArray];
             for (let i = shuffle.length - 1; i > 0; i--) {
                 let j = Math.floor(Math.random() * (i + 1));
@@ -111,7 +125,7 @@ class App {
     newGame() {
         this.getRandomCards(this.state.difficultyLevel);
 
-        this.game = new Game(this, this.state.parentNode);
+        this.game = new Game(this);
         this.hide();
     }
 
@@ -122,5 +136,6 @@ class App {
 
 document.addEventListener('DOMContentLoaded', onContentLoaded);
 function onContentLoaded() {
+    // @ts-expect-error TS(2339): Property 'application' does not exist on type 'Win... Remove this comment to see the full error message
     window.application = new App(document.querySelector('#app'));
 }
