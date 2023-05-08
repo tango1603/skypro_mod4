@@ -159,6 +159,28 @@ body {
 .card {
     position: relative;
     perspective: 500px;
+
+    /* for debugging 
+    &:hover .front {
+        transform: rotateY(180deg);
+    }
+
+    &:hover .back {
+        transform: rotateY(360deg);
+    }*/
+
+    &--active {
+        pointer-events: none;
+        cursor: default;
+    }
+
+    &--active .front {
+        transform: rotateY(180deg);
+    }
+
+    &--active .back {
+        transform: rotateY(360deg);
+    }
 }
 
 .front,
@@ -173,19 +195,11 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: #dd8800;
+    background-color: #ffffff;
     transform: rotateY(180deg);
     width: 95px;
     height: 133px;
     border-radius: 5px;
-}
-
-.card:hover .front {
-    transform: rotateY(180deg);
-}
-
-.card:hover .back {
-    transform: rotateY(360deg);
 }
 
 .card-container {

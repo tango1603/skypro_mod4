@@ -7,6 +7,8 @@ export class Game {
         this.state = app.state;
         this.restartGame = app.start;
         this.cardsForRender = [];
+        this.checkCards = this.checkCards.bind(this);
+        this.hideCards = this.hideCards.bind(this);
 
         this.render();
 
@@ -15,7 +17,15 @@ export class Game {
             this.hide();
             this.restartGame();
         });
+
+        this.cards = this.state.parentNode.querySelectorAll('.card');
+
+        this.cards.forEach((card) => {
+            card.addEventListener('click', () => this.checkCards(card));
+        });
+
         this.getTimeInGame();
+        this.showCards();
     }
 
     getTimeInGame() {
@@ -56,15 +66,13 @@ export class Game {
     }
 
     render() {
-        console.log(
-            '🚀 ~ file: game.js:115 ~ Game ~ this.state.gameDesc.forEach ~ this.state.gameDesc:',
-            this.state.gameDesc
-        );
-
-        this.state.gameDesc.forEach(() => {
+        this.state.gameDesc.forEach((card, cardIndex) => {
             this.cardsForRender.push({
                 tag: 'div',
                 cls: ['card'],
+                attrs: {
+                    'data-cid': `${cardIndex}`,
+                },
                 content: [
                     {
                         tag: 'img',
@@ -95,7 +103,7 @@ export class Game {
                                                         cls: [
                                                             'card-container__box',
                                                         ],
-                                                        content: 'A',
+                                                        content: `${card.cardValue}`,
                                                     },
                                                     {
                                                         tag: 'img',
@@ -103,7 +111,7 @@ export class Game {
                                                             'card-container__icon',
                                                         ],
                                                         attrs: {
-                                                            src: './images/vini.svg',
+                                                            src: `${card.cardSuit.imgUrl}`,
                                                             alt: 'масть карты mini',
                                                         },
                                                     },
@@ -115,7 +123,7 @@ export class Game {
                                         tag: 'img',
                                         cls: ['card-container__logo'],
                                         attrs: {
-                                            src: './images/vini.svg',
+                                            src: `${card.cardSuit.imgUrl}`,
                                             alt: 'масть карты',
                                         },
                                     },
@@ -135,7 +143,7 @@ export class Game {
                                                         cls: [
                                                             'card-container__box',
                                                         ],
-                                                        content: 'A',
+                                                        content: `${card.cardValue}`,
                                                     },
                                                     {
                                                         tag: 'img',
@@ -143,7 +151,7 @@ export class Game {
                                                             'card-container__icon',
                                                         ],
                                                         attrs: {
-                                                            src: './images/vini.svg',
+                                                            src: `${card.cardSuit.imgUrl}`,
                                                             alt: 'масть карты mini',
                                                         },
                                                     },
@@ -162,23 +170,63 @@ export class Game {
         this.state.parentNode.appendChild(
             render(templates.game(this.cardsForRender))
         );
-
-        this.setBtnActions();
     }
 
-    setBtnActions() {
-        //TODO
+    checkCards(card) {
+        const curId = card.dataset.cid;
+        const curCard = this.state.gameDesc[curId];
+        const { selectedCard } = this.state;
+        console.log(selectedCard, curCard);
+        if (!selectedCard.card) {
+            selectedCard.card = curCard;
+            selectedCard.id = curId;
+            selectedCard.dom = card;
+            card.classList.add('card--active');
+            return;
+        }
+
+        if (
+            selectedCard.card.cardValue === curCard.cardValue &&
+            selectedCard.card.cardSuit.name === curCard.cardSuit.name
+        ) {
+            this.state.countForWin = this.state.countForWin - 2;
+
+            this.state.gameDesc[card.dataset.cid].isFindOut = false;
+            this.state.gameDesc[selectedCard.id].isFindOut = false;
+            card.classList.add('card--active');
+            selectedCard.card = null;
+            selectedCard.id = null;
+            selectedCard.dom = null;
+        } else {
+            selectedCard.dom.classList.remove('card--active');
+            setTimeout(this.showLoseMessage.bind(this), 500);
+        }
+
+        if (this.state.countForWin === 0) {
+            setTimeout(this.showWinMessage.bind(this), 500);
+        }
     }
 
-    checkCards() {
-        //TODO:
+    showLoseMessage() {
+        alert('You lose!');
+    }
+
+    showWinMessage() {
+        alert('You win!');
     }
 
     showCards() {
-        //TODO classList.add("");
+        this.cards.forEach((card) => {
+            card.classList.add('card--active');
+        });
+        this.tempTimer = setTimeout(this.hideCards, 5000);
+        console.log('🚀 ~ file: game.js:213 ~ Game ~ showCards ~ showCards:');
     }
     hideCards() {
-        //TODO classList.remove("");
+        console.log('🚀 ~ file: game.js:219 ~ Game ~ hideCards ~ hideCards:');
+        this.cards.forEach((card) => {
+            card.classList.remove('card--active');
+        });
     }
 
     hide() {

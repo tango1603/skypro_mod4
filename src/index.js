@@ -6,11 +6,9 @@ import { templates } from './js/template/templates';
 class App {
     constructor(parentNode) {
         console.log('Game started', this);
+
         this.state = {
             parentNode: parentNode,
-            gameDesc: [],
-            selectedCards: [],
-            difficultyLevel: null,
         };
 
         this.start = this.start.bind(this);
@@ -26,12 +24,18 @@ class App {
 
         const deckBuilder = () => {
             const values = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
-            const suits = ['Hearts', 'Diamonds', 'Spades', 'Clubs'];
+            const suits = [
+                { name: 'Hearts', imgUrl: './images/1.svg' },
+                { name: 'Diamonds', imgUrl: './images/2.svg' },
+                { name: 'Spades', imgUrl: './images/3.svg' },
+                { name: 'Clubs', imgUrl: './images/4.svg' },
+            ];
             const cards = [];
             for (let s = 0; s < suits.length; s++) {
                 for (let v = 0; v < values.length; v++) {
                     const value = values[v];
                     const suit = suits[s];
+
                     cards.push({ value, suit });
                 }
             }
@@ -42,8 +46,9 @@ class App {
             const random = Math.floor(Math.random() * 36);
             const cardValue = cards[random].value;
             const cardSuit = cards[random].suit;
+            const isFindOut = true;
 
-            return { cardValue, cardSuit };
+            return { cardValue, cardSuit, isFindOut };
         };
 
         const shuffleCards = (cardsArray) => {
@@ -63,10 +68,20 @@ class App {
             randomCards.push(card);
         }
 
+        this.state.countForWin = level;
         this.state.gameDesc = shuffleCards(shuffleCards(randomCards));
     }
 
     start() {
+        this.state = {
+            parentNode: this.state.parentNode,
+            gameDesc: [],
+            gameDescProcess: [],
+            selectedCard: { card: null, id: null, dom: null },
+            difficultyLevel: null,
+            countForWin: null,
+        };
+
         this.state.parentNode.appendChild(render(templates.start));
 
         this.difficultyLevelBtns = this.state.parentNode.querySelectorAll(
