@@ -111,45 +111,37 @@ export const templates = {
     }),
     status: (options) => ({
         tag: 'section',
-        cls: ['status'],
+        cls: ['modal', 'status'],
         content: [
             {
-                tag: 'header',
-                cls: ['header'],
-                content: [{ tag: 'div', cls: ['strip'], content: '' }],
+                tag: 'img',
+                cls: ['status__logo'],
+                attrs: {
+                    src: `${options.logo}`,
+                    alt: 'status logo',
+                },
             },
             {
-                tag: 'main',
-                cls: ['container'],
-                content: [
-                    { tag: 'h2', cls: ['caption'], content: 'Игра' },
-                    {
-                        tag: 'h3',
-                        cls: ['vs'],
-                        content: options.enemy || 'игрок еще не подключился',
-                    },
-                    {
-                        tag: 'img',
-                        cls: ['logo'],
-                        attrs: {
-                            src: options.logo,
-                            alt: 'логотип счастливое сердце',
-                        },
-                    },
-                    { tag: 'h1', cls: ['status'], content: options.text },
-                    {
-                        tag: 'button',
-                        cls: ['btn-main', 'move-group__btn'],
-                        attrs: { id: 'nextgame' },
-                        content: 'Играть еще',
-                    },
-                    {
-                        tag: 'button',
-                        cls: ['btn-main', 'move-group__btn'],
-                        attrs: { id: 'gotolobby' },
-                        content: 'В лобби',
-                    },
-                ],
+                tag: 'h1',
+                cls: ['status__caption'],
+                content: `${options.message}`,
+            },
+            {
+                tag: 'p',
+                cls: ['status__text'],
+                content: `Затраченное время:`,
+            },
+            {
+                tag: 'p',
+                cls: ['status__time'],
+                content: `${options.time}`,
+            },
+
+            {
+                tag: 'button',
+                cls: ['btn'],
+                attrs: { id: 'status' },
+                content: 'Старт',
             },
         ],
     }),

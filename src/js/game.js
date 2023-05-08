@@ -197,20 +197,49 @@ export class Game {
             selectedCard.dom = null;
         } else {
             selectedCard.dom.classList.remove('card--active');
-            setTimeout(this.showLoseMessage.bind(this), 500);
+            // setTimeout(this.showMessage.bind(this), 500);
+            this.showMessage({
+                logo: './images/dead.png',
+                message: 'Вы проиграли!',
+            });
         }
 
         if (this.state.countForWin === 0) {
-            setTimeout(this.showWinMessage.bind(this), 500);
+            //setTimeout(this.showMessage.bind(this), 500);
+            this.showMessage({
+                logo: './images/celebration.png',
+                message: 'Вы выиграли!',
+            });
         }
     }
 
-    showLoseMessage() {
-        alert('You lose!');
-    }
+    showMessage(options) {
+        this.state.timer.stop();
 
-    showWinMessage() {
-        alert('You win!');
+        let time = new Date();
+        time.setMinutes(this.state.timer.minutes);
+        time.setSeconds(this.state.timer.seconds);
+
+        this.state.parentNode.appendChild(
+            render(
+                templates.status({
+                    logo: options.logo,
+                    message: options.message,
+                    time: `${time.toLocaleString('ru', {
+                        minute: 'numeric',
+                        second: 'numeric',
+                    })}`,
+                })
+            )
+        );
+
+        this.btnModal = this.state.parentNode.querySelector('#status');
+        this.btnModal.addEventListener('click', () => {
+            this.hide();
+            this.restartGame();
+        });
+
+        this.hide();
     }
 
     showCards() {
@@ -226,7 +255,6 @@ export class Game {
     }
 
     hide() {
-        this.state.timer.stop();
         this.state.parentNode.firstElementChild.remove();
     }
 }
