@@ -1,16 +1,17 @@
 export class Game {
-  constructor(state) {
-    this.state = state;    
-    this.render();
-  }
+    constructor(state) {
+        this.state = state;
+        this.render();
+    }
 
-  getRandomCards(difficultyLevel){}
+    getRandomCards(difficultyLevel) {
+        return difficultyLevel * 2;
+    }
 
-  getTimeInGame(){}
+    getTimeInGame() {}
 
-  render() {
-    //TODO: реализовать рендер по шаблону
-    console.log("renderGame", this.state);
-
-  }
+    render() {
+        //TODO: реализовать рендер по шаблону
+        console.log('renderGame', this.state);
+    }
 }
