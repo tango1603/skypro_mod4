@@ -5,7 +5,7 @@ import { templates } from './js/template/templates';
 
 class App {
     constructor(parentNode) {
-        console.log('Game started', this);
+        console.log('Game started');
 
         this.state = {
             parentNode: parentNode,

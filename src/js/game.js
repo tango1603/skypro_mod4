@@ -3,7 +3,6 @@ import { templates } from './template/templates';
 
 export class Game {
     constructor(app) {
-        console.log('Game', this);
         this.state = app.state;
         this.restartGame = app.start;
         this.cardsForRender = [];
@@ -176,7 +175,6 @@ export class Game {
         const curId = card.dataset.cid;
         const curCard = this.state.gameDesc[curId];
         const { selectedCard } = this.state;
-        console.log(selectedCard, curCard);
         if (!selectedCard.card) {
             selectedCard.card = curCard;
             selectedCard.id = curId;
@@ -220,10 +218,8 @@ export class Game {
             card.classList.add('card--active');
         });
         this.tempTimer = setTimeout(this.hideCards, 5000);
-        console.log('🚀 ~ file: game.js:213 ~ Game ~ showCards ~ showCards:');
     }
     hideCards() {
-        console.log('🚀 ~ file: game.js:219 ~ Game ~ hideCards ~ hideCards:');
         this.cards.forEach((card) => {
             card.classList.remove('card--active');
         });

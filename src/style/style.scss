@@ -123,7 +123,7 @@ body {
 }
 
 .time {
-    color: #fff;
+    color: $white;
     display: flex;
     flex-wrap: wrap;
     align-items: end;
@@ -160,15 +160,6 @@ body {
     position: relative;
     perspective: 500px;
 
-    /* for debugging 
-    &:hover .front {
-        transform: rotateY(180deg);
-    }
-
-    &:hover .back {
-        transform: rotateY(360deg);
-    }*/
-
     &--active {
         pointer-events: none;
         cursor: default;
@@ -195,7 +186,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: #ffffff;
+    background-color: $white;
     transform: rotateY(180deg);
     width: 95px;
     height: 133px;
