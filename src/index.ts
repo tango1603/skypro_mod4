@@ -1,14 +1,16 @@
 import './style/style.scss';
-import { Game } from './js/game';
+import { Game } from './game';
 import render from './js/template/template-engine';
 import { templates } from './js/template/templates';
+import './interfaces.ts';
 
 class App {
-    difficultyLevelBtns: any;
-    game: any;
-    startBtn: any;
-    state: any;
-    constructor(parentNode) {
+    difficultyLevelBtns: NodeListOf<HTMLFormElement>;
+
+    game: object;
+    startBtn: HTMLFormElement;
+    state: State;
+    constructor(parentNode: HTMLFormElement) {
         console.log('Game started');
 
         this.state = {
@@ -38,34 +40,34 @@ class App {
                 'K',
                 'A',
             ];
-            const suits: Array<Object> = [
+            const suits: Array<Suit> = [
                 { name: 'Hearts', imgUrl: './images/1.svg' },
                 { name: 'Diamonds', imgUrl: './images/2.svg' },
                 { name: 'Spades', imgUrl: './images/3.svg' },
                 { name: 'Clubs', imgUrl: './images/4.svg' },
             ];
-            const cards: Array<Object> = [];
+            const cards: Array<Card> = [];
             for (let s = 0; s < suits.length; s++) {
                 for (let v = 0; v < values.length; v++) {
-                    const value = values[v];
-                    const suit = suits[s];
+                    const cardValue = values[v];
+                    const cardSuit = suits[s];
 
-                    cards.push({ value, suit });
+                    cards.push({ cardValue, cardSuit });
                 }
             }
             return cards;
         };
 
-        const randomCard = (cards) => {
+        const randomCard = (cards: Array<Card>) => {
             const random: number = Math.floor(Math.random() * 36);
-            const cardValue: string = cards[random].value;
-            const cardSuit: Object = cards[random].suit;
-            const isFindOut: boolean = true;
+            const cardValue = cards[random].cardValue;
+            const cardSuit = cards[random].cardSuit;
+            const isFindOut = true;
 
             return { cardValue, cardSuit, isFindOut };
         };
 
-        const shuffleCards = (cardsArray: Array<Object>) => {
+        const shuffleCards = (cardsArray: Array<Card>) => {
             const shuffle = [...cardsArray];
             for (let i = shuffle.length - 1; i > 0; i--) {
                 let j = Math.floor(Math.random() * (i + 1));
@@ -101,14 +103,17 @@ class App {
         this.difficultyLevelBtns = this.state.parentNode.querySelectorAll(
             '.difficulty-level__item'
         );
+        for (let i = 0; i < this.difficultyLevelBtns.length; i++) {
+            const btn = this.difficultyLevelBtns[i];
 
-        for (const btn of this.difficultyLevelBtns) {
             btn.addEventListener('click', () => {
                 this.state.difficultyLevel =
                     btn.getAttribute('data-difficulty');
 
-                for (const dLBtn of this.difficultyLevelBtns) {
-                    dLBtn.classList.remove('btn_selected');
+                for (let i = 0; i < this.difficultyLevelBtns.length; i++) {
+                    this.difficultyLevelBtns[i].classList.remove(
+                        'btn_selected'
+                    );
                 }
 
                 btn.classList.add('btn_selected');

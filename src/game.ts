@@ -1,13 +1,19 @@
-import render from './template/template-engine';
-import { templates } from './template/templates';
+import render from './js/template/template-engine';
+import { templates } from './js/template/templates';
+import './interfaces';
 
 export class Game {
-    btn: any;
-    btnModal: any;
-    cards: any;
+    // difficultyLevelBtns: NodeListOf<HTMLFormElement>;
+
+    // game: object;
+    //startBtn: HTMLFormElement;
+    state: State;
+
+    btn: HTMLFormElement;
+    btnModal: HTMLFormElement;
+    cards: NodeListOf<HTMLFormElement>;
     cardsForRender: any;
     restartGame: any;
-    state: any;
     tempTimer: any;
     constructor(app) {
         this.state = app.state;
