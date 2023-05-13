@@ -3,6 +3,11 @@ interface Suit {
     imgUrl: string;
 }
 
+interface Message {
+    logoUrl: string;
+    message: string;
+}
+
 interface Card {
     cardValue: string;
     cardSuit: Suit;
@@ -21,9 +26,9 @@ interface GameTimer {
     seconds: number;
     minutes: number;
     int?: ReturnType<typeof setInterval> | undefined;
-    start: Function;
-    stop: Function;
-    displayTimer: Function;
+    start: () => void;
+    stop: () => void;
+    displayTimer: () => void;
 }
 
 interface State {
@@ -40,5 +45,5 @@ interface Template {
     tag: string;
     cls: string | Array<string>;
     attrs?: object;
-    content: string | Array<Template>;
+    content?: Array<Template> | string;
 }

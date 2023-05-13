@@ -3,21 +3,17 @@ import { templates } from './js/template/templates';
 import './interfaces';
 
 export class Game {
-    // difficultyLevelBtns: NodeListOf<HTMLFormElement>;
-
-    // game: object;
-    //startBtn: HTMLFormElement;
     state: State;
-
     btn: HTMLFormElement;
     btnModal: HTMLFormElement;
     cards: NodeListOf<HTMLFormElement>;
-    cardsForRender: any;
-    restartGame: any;
-    tempTimer: any;
-    constructor(app) {
-        this.state = app.state;
-        this.restartGame = app.start;
+    cardsForRender: Array<Template>;
+    restartGame: Function;
+    tempTimer: ReturnType<typeof setInterval> | undefined;
+
+    constructor(state: State, start: Function) {
+        this.state = state;
+        this.restartGame = start;
         this.cardsForRender = [];
         this.checkCards = this.checkCards.bind(this);
         this.hideCards = this.hideCards.bind(this);
@@ -32,7 +28,7 @@ export class Game {
 
         this.cards = this.state.parentNode.querySelectorAll('.card');
 
-        this.cards.forEach((card) => {
+        this.cards.forEach((card: HTMLFormElement) => {
             card.addEventListener('click', () => this.checkCards(card));
         });
 
@@ -184,7 +180,7 @@ export class Game {
         );
     }
 
-    checkCards(card) {
+    checkCards(card: HTMLElement) {
         const curId: string = card.dataset.cid;
         const curCard = this.state.gameDesc[curId];
         const { selectedCard } = this.state;
@@ -212,7 +208,7 @@ export class Game {
             selectedCard.dom.classList.remove('card--active');
             // setTimeout(this.showMessage.bind(this), 500);
             this.showMessage({
-                logo: './images/dead.png',
+                logoUrl: './images/dead.png',
                 message: 'Вы проиграли!',
             });
         }
@@ -220,13 +216,13 @@ export class Game {
         if (this.state.countForWin === 0) {
             //setTimeout(this.showMessage.bind(this), 500);
             this.showMessage({
-                logo: './images/celebration.png',
+                logoUrl: './images/celebration.png',
                 message: 'Вы выиграли!',
             });
         }
     }
 
-    showMessage(options) {
+    showMessage(options: Message) {
         this.state.timer.stop();
 
         let time = new Date();
@@ -236,7 +232,7 @@ export class Game {
         this.state.parentNode.appendChild(
             render(
                 templates.status({
-                    logo: options.logo,
+                    logo: options.logoUrl,
                     message: options.message,
                     time: `${time.toLocaleString('ru', {
                         minute: 'numeric',
@@ -256,13 +252,13 @@ export class Game {
     }
 
     showCards() {
-        this.cards.forEach((card) => {
+        this.cards.forEach((card: HTMLElement) => {
             card.classList.add('card--active');
         });
         this.tempTimer = setTimeout(this.hideCards, 5000);
     }
     hideCards() {
-        this.cards.forEach((card) => {
+        this.cards.forEach((card: HTMLElement) => {
             card.classList.remove('card--active');
         });
     }

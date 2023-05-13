@@ -7,7 +7,7 @@ import './interfaces.ts';
 class App {
     difficultyLevelBtns: NodeListOf<HTMLFormElement>;
 
-    game: object;
+    game: Game;
     startBtn: HTMLFormElement;
     state: State;
     constructor(parentNode: HTMLFormElement) {
@@ -130,7 +130,7 @@ class App {
     newGame() {
         this.getRandomCards(this.state.difficultyLevel);
 
-        this.game = new Game(this);
+        this.game = new Game(this.state, this.start);
         this.hide();
     }
 
