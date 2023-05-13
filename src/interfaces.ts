@@ -14,7 +14,7 @@ interface Card {
     isFindOut?: boolean;
 }
 
-interface selectedCard {
+interface SelectedCard {
     card?: Card;
     id?: string;
     dom?: Element;
@@ -35,7 +35,7 @@ interface State {
     parentNode: Element;
     countForWin?: number;
     difficultyLevel?: string;
-    selectedCard?: selectedCard;
+    selectedCard?: SelectedCard;
     gameDesc?: Array<Card>;
     gameDescProcess?: Array<Card>;
     timer?: GameTimer;
@@ -44,6 +44,6 @@ interface State {
 interface Template {
     tag: string;
     cls: string | Array<string>;
-    attrs?: object;
+    attrs?: {};
     content?: Array<Template> | string;
 }
