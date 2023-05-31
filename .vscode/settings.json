@@ -3,9 +3,17 @@
   "cSpell.words": [
     "фронтенд",
     "Btns",
+    "camelcase",
     "cbtn",
     "Skypro",
     "stratosskyengweb",
     "stylelint"
-  ]
+  ],
+  "scss.validate": false,
+  "css.validate": false,
+  "less.validate": false,
+
+   "editor.codeActionsOnSave": {
+     "source.fixAll.stylelint": true
+   },
 }

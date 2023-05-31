@@ -11,8 +11,13 @@
         "sourceType": "module"
     },
     "rules": {
-        "prettier/prettier": "error",
-        "camelcase": ["error"],
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto"
+            }
+        ],
+        "camelcase": ["warning"],
         "eqeqeq": ["error", "always"]
     }
 }
