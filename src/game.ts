@@ -3,13 +3,14 @@ import { templates } from './js/template/templates';
 import './interfaces';
 
 export class Game {
-    state: State;
-    btn: HTMLFormElement;
+    state?: State;
+    btn?: HTMLFormElement;
     btnModal: HTMLFormElement;
     cards: NodeListOf<HTMLFormElement>;
-    cardsForRender: Array<Template>;
-    restartGame: Function;
+    cardsForRender?: Array<Template>;
+
     tempTimer: ReturnType<typeof setInterval> | undefined;
+    restartGame: Function;
 
     constructor(state: State, start: Function) {
         this.state = state;
@@ -174,6 +175,7 @@ export class Game {
                 ],
             });
         });
+        debugger;
 
         this.state.parentNode.appendChild(
             render(templates.game(this.cardsForRender))
