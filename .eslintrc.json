@@ -17,7 +17,7 @@
                 "endOfLine": "auto"
             }
         ],
-        "camelcase": ["warning"],
+        // "camelcase": ["warning"],
         "eqeqeq": ["error", "always"]
     }
 }
